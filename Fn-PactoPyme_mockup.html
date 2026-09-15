@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>PactoPyme — Mockup</title>
+<style>
+  :root{
+    --bg:#f4f5f7; --panel:#ffffff; --frame:#eef0f3;
+    --border:#dfe2e6; --border-strong:#c3c8ce;
+    --text:#1c1f24; --text-secondary:#5b6169; --text-muted:#8b9096;
+    --navy:#0C2A52; --navy-dark:#081b36;
+    --emerald:#0F6E56; --emerald-dark:#0a5843;
+    --accent:#0c447c; --accent-bg:#e6f1fb;
+    --warning:#854f0b; --warning-bg:#faeeda;
+    --danger:#a32d2d; --danger-bg:#fcebeb;
+    --success:#0f6e56; --success-bg:#e1f5ee;
+    --radius:8px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:32px 16px; background:var(--bg);
+    font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    color:var(--text);
+  }
+  .wrap{max-width:680px;margin:0 auto;}
+  h1,h2{font-weight:500;margin:0;}
+  p{margin:0;}
+  .title{text-align:center;margin-bottom:20px;}
+  .title .logo{
+    width:48px;height:48px;border-radius:12px;background:var(--navy);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:22px;
+    margin:0 auto 10px;
+  }
+  .title h1{font-size:24px;color:var(--navy);}
+  .title p{font-size:13px;color:var(--text-secondary);margin-top:4px;}
+
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;}
+  .tab{
+    font-size:11px;padding:6px 9px;border-radius:var(--radius);border:1px solid var(--border-strong);
+    background:transparent;cursor:pointer;color:var(--text);display:flex;align-items:center;gap:4px;
+  }
+  .tab.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+  .device{background:var(--frame);border-radius:16px;padding:10px;border:1px solid var(--border);}
+  .browser{background:var(--panel);border-radius:10px;overflow:hidden;border:1px solid var(--border);}
+  .browserbar{display:flex;align-items:center;gap:6px;padding:8px 12px;border-bottom:1px solid var(--border);}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--border-strong);}
+  .urlbar{margin-left:8px;font-size:12px;color:var(--text-muted);}
+  #screen{padding:20px;min-height:460px;}
+
+  input,textarea,select,button{
+    font-family:inherit;font-size:13px;border:1px solid var(--border-strong);
+    border-radius:var(--radius);padding:9px 10px;
+  }
+  input,select,textarea{width:100%;background:#fff;color:var(--text);}
+  button{background:transparent;cursor:pointer;color:var(--text);}
+  button:hover{background:#f2f3f5;}
+  .btn-navy{background:var(--navy);color:#fff;border:none;padding:12px;border-radius:var(--radius);font-size:14px;width:100%;}
+  .btn-navy:hover{background:var(--navy-dark);}
+  .btn-emerald{background:var(--emerald);color:#fff;border:none;padding:12px;border-radius:var(--radius);font-size:14px;width:100%;}
+  .btn-emerald:hover{background:var(--emerald-dark);}
+  .btn-link{background:transparent;border:none;color:var(--accent);font-size:13px;width:100%;}
+
+  .card{border:1px solid var(--border);border-radius:var(--radius);padding:12px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .stat{border-radius:var(--radius);padding:12px;}
+  .stat p:first-child{font-size:12px;}
+  .stat p:last-child{font-size:22px;font-weight:500;margin-top:2px;}
+  .otp-boxes{display:flex;gap:8px;justify-content:center;margin-bottom:16px;}
+  .otp-boxes input{width:36px;height:44px;text-align:center;font-size:18px;padding:0;}
+  .pill{font-size:11px;padding:4px 8px;border-radius:999px;}
+  .pill.success{background:var(--success-bg);color:var(--success);}
+  .pill.warning{background:var(--warning-bg);color:var(--warning);}
+  .pill.danger{background:var(--danger-bg);color:var(--danger);}
+  .footnote{font-size:11px;color:var(--text-muted);margin-top:10px;}
+  .biz-option{border:1px solid var(--border);border-radius:var(--radius);padding:18px 10px;text-align:center;}
+  .biz-option .ic{font-size:26px;color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="title">
+    <div class="logo">🤝</div>
+    <h1>PactoPyme</h1>
+    <p>Tus negocios seguros, tu empresa protegida.</p>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+
+  <div class="device">
+    <div class="browser">
+      <div class="browserbar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="urlbar">pactopyme.app</span>
+      </div>
+      <div id="screen"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const screens = [
+  { id:"splash", label:"1. Splash", render: () => `
+    <div style="text-align:center;background:${'var(--navy)'};margin:-20px;padding:56px 20px;border-radius:8px;">
+      <div style="width:56px;height:56px;border-radius:14px;background:rgba(255,255,255,0.12);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:26px;">🤝</div>
+      <h1 style="color:#fff;margin-bottom:6px;">PactoPyme</h1>
+      <p style="color:#cfe0f5;font-size:13px;">Tus negocios seguros, tu empresa protegida.</p>
+    </div>`},
+  { id:"acceso", label:"2. Acceso", render: () => `
+    <h2 style="margin-bottom:14px;">Ingresa a tu cuenta</h2>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <input placeholder="NIT o cédula">
+      <input placeholder="Contraseña" type="password">
+      <button class="btn-emerald">Ingresar</button>
+      <button class="btn-link">Registrar mi mipyme</button>
+    </div>`},
+  { id:"panel", label:"3. Panel", render: () => `
+    <h2 style="margin-bottom:14px;">Hola, Tu Empresa S.A.S.</h2>
+    <div class="grid2" style="margin-bottom:20px;">
+      <div class="stat" style="background:var(--frame);"><p style="color:var(--text-secondary);">Acuerdos vigentes</p><p>3</p></div>
+      <div class="stat" style="background:var(--warning-bg);"><p style="color:var(--warning);">Pendiente de firma</p><p style="color:var(--warning);">1</p></div>
+    </div>
+    <button class="btn-navy">+ Nuevo pacto</button>`},
+  { id:"tipo", label:"4. Tipo negocio", render: () => `
+    <h2 style="margin-bottom:14px;">¿Qué vas a acordar hoy?</h2>
+    <div class="grid2">
+      ${[["🚚","Compraventa de mercancía"],["🛠️","Prestación de servicios"],["📦","Acuerdo de suministro"],["⋯","Otro"]].map(([ic,t])=>`
+        <div class="biz-option"><div class="ic">${ic}</div><p style="font-size:13px;margin-top:8px;">${t}</p></div>`).join("")}
+    </div>`},
+  { id:"terminos", label:"5. Términos", render: () => `
+    <h2 style="margin-bottom:14px;">Términos del pacto</h2>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px;">
+      <input placeholder="Celular o NIT de la contraparte">
+      <input placeholder="Valor total (ej: $1.500.000 COP)">
+      <input placeholder="Fecha límite de pago" type="date">
+    </div>
+    <div style="background:var(--warning-bg);color:var(--warning);border-radius:var(--radius);padding:10px 12px;font-size:12px;">
+      Dejar el plazo por escrito ayuda a evitar disputas sobre cuándo era exigible el pago. Es una recomendación práctica de redacción, no la cita de un artículo específico.
+    </div>`},
+  { id:"previa", label:"6. Vista previa", render: () => `
+    <h2 style="margin-bottom:4px;">Vista previa del pacto</h2>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:14px;">En lenguaje claro, sin "abogañol"</p>
+    <div class="card" style="background:var(--frame);line-height:1.7;margin-bottom:14px;">
+      <b>[Tu empresa]</b> se compromete a prestar <b>[servicio o producto]</b> a <b>[cliente]</b> por valor de <b>$1.500.000</b> pagaderos el <b>15/sept/2026</b>.
+    </div>
+    <button class="btn-navy">Enviar para firma electrónica</button>`},
+  { id:"otp", label:"7. Firma OTP", render: () => `
+    <h2 style="margin-bottom:4px;">Firma electrónica</h2>
+    <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">Tu Empresa S.A.S. te ha enviado un pacto comercial. Enviamos un código a tu WhatsApp terminación -4532.</p>
+    <div class="otp-boxes">${Array(6).fill('<input maxlength="1">').join("")}</div>
+    <label style="display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--text-secondary);margin-bottom:14px;">
+      <input type="checkbox" style="width:auto;margin-top:2px;">
+      <span>Acepto la política de tratamiento de datos (Ley 1581 de 2012) y firmo electrónicamente (Ley 527 de 1999).</span>
+    </label>
+    <button class="btn-emerald">Confirmar firma</button>`},
+  { id:"sellado", label:"8. Sellado", render: () => `
+    <div style="text-align:center;padding:20px 0;">
+      <div style="width:52px;height:52px;border-radius:50%;background:var(--success-bg);color:var(--success);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:26px;">🔒</div>
+      <h2 style="margin-bottom:6px;">¡Pacto sellado!</h2>
+      <p style="font-size:13px;color:var(--text-secondary);margin-bottom:16px;">El mensaje de datos quedó cifrado y almacenado.</p>
+      <div class="card" style="background:var(--frame);font-family:monospace;font-size:11px;color:var(--text-muted);word-break:break-all;">
+        Identificador de integridad: 9f86d081884c7d659a...
+      </div>
+    </div>`},
+  { id:"historial", label:"9. Historial", render: () => `
+    <h2 style="margin-bottom:14px;">Historial y trazabilidad</h2>
+    ${[["Mantenimiento — Cliente A","$1.500.000","Pagado","success"],["Suministro repuestos","$3.200.000","En ejecución","warning"],["Servicio prestado — Cliente B","$800.000","Vencido","danger"]].map(([n,v,s,c])=>`
+      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);padding:10px 0;">
+        <div><p style="font-size:13px;">${n}</p><p style="font-size:12px;color:var(--text-muted);margin-top:2px;">${v}</p></div>
+        <span class="pill ${c}">${s}</span>
+      </div>`).join("")}
+    <button style="width:100%;margin-top:14px;">Descargar certificado probatorio (PDF)</button>`},
+  { id:"perfil", label:"10. Perfil legal", render: () => `
+    <h2 style="margin-bottom:14px;">Perfil legal y configuración</h2>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div class="card"><p style="font-size:12px;color:var(--text-secondary);">Representante legal</p><p style="font-size:14px;margin-top:2px;">Dairo Castrillón Burgos</p></div>
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;">Certificado cámara de comercio</span><span style="font-size:12px;color:var(--accent);">Enlazado ✓</span>
+      </div>
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;">Permisos de privacidad</span><span style="font-size:12px;color:var(--accent);">Gestionar</span>
+      </div>
+    </div>`}
+];
+
+const tabsEl = document.getElementById("tabs");
+const screenEl = document.getElementById("screen");
+
+function renderTabs(){
+  tabsEl.innerHTML = "";
+  screens.forEach(s=>{
+    const b = document.createElement("button");
+    b.className = "tab";
+    b.textContent = s.label;
+    b.dataset.id = s.id;
+    b.onclick = () => paint(s.id);
+    tabsEl.appendChild(b);
+  });
+}
+
+function paint(id){
+  const s = screens.find(x=>x.id===id);
+  screenEl.innerHTML = s.render();
+  [...tabsEl.children].forEach(b=>{
+    b.className = "tab" + (b.dataset.id===id ? " active" : "");
+  });
+}
+
+renderTabs();
+paint("splash");
+</script>
+</body>
+</html>
